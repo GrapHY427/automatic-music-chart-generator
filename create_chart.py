@@ -26,9 +26,6 @@ class ChartParser:
         self.event_order_list = chart_dict["event_order_list"]
         self.note_list = chart_dict["note_list"]
 
-    def get_note_list(self):
-        return self.note_list
-
 
 class ChartGenerator:
     """ Receiving the tensor from the neural network,
@@ -56,7 +53,8 @@ class ChartGenerator:
         self.note_list = []
 
     def get_file_bpm(self):
-        """ Calculate the beats per minute (bpm) of a given file.
+        """
+        Calculate the beats per minute (bpm) of a given file.
         """
 
         # default:
@@ -84,7 +82,8 @@ class ChartGenerator:
                 break
 
         def beats_to_bpm(beat_times, path):
-            """if enough beats are found, convert to periods then to bpm
+            """
+            If enough beats are found, convert to periods then to bpm
             """
             if len(beat_times) > 1:
                 if len(beat_times) < 4:
@@ -98,6 +97,9 @@ class ChartGenerator:
         return beats_to_bpm(beats, self.music_path)
 
     def generate_page_list(self):
+        """
+        Fill the page_list with formatted dictionary
+        """
         start_tick = 0
         end_tick = self.page_tick
         scan_line_direction = 1
@@ -119,8 +121,10 @@ class ChartGenerator:
     def generate_chart(self):
         with open(self.filename, 'w+', encoding="utf-8") as f:
             json.dump(self.chart_head, f)
-            json.dump(self.page_list, f)
-            json.dump(self.note_list, f)
+            json.dump({"page_list": self.page_list}, f)
+            json.dump({"tempo_list": self.tempo_list}, f)
+            json.dump({"event_order_list": self.event_order_list}, f)
+            json.dump({"note_list": self.note_list}, f)
 
 
 class Note:
@@ -149,8 +153,8 @@ class Note:
 util = ChartGenerator('music')
 util.generate_page_list()
 print(util.bpm)
-print(util.tempo_list)
-i = 0
-for each in util.page_list:
-    print(str(i) + str(each))
-    i += 1
+util.generate_chart()
+# i = 0
+# for each in util.page_list:
+#     print(str(i) + str(each))
+#     i += 1
