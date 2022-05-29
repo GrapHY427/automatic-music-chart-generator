@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7deedf3-cc2f-4679-a7e6-2b768ea886cd" name="默认变更列表" comment="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_chart.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+    <list default="true" id="c7deedf3-cc2f-4679-a7e6-2b768ea886cd" name="默认变更列表" comment="Implement the struct of the neural network&#10;(With linear layer only, which seems stupid, but I don't know what else I can try to implement an  &quot;audio-to-json&quot; task, which need some creativity, RNN seems doesn't have ability to create something)">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653823264839</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implement the struct of the neural network&#10;(With linear layer only, which seems stupid, but I don't know what else I can try to implement an  &quot;audio-to-json&quot; task, which need some creativity, RNN seems doesn't have ability to create something)">
+      <created>1653834141295</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1653834141295</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,6 +180,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="complete 'dump to json' method" />
     <MESSAGE value="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)" />
-    <option name="LAST_COMMIT_MESSAGE" value="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)" />
+    <MESSAGE value="Implement the struct of the neural network&#10;(With linear layer only, which seems stupid, but I don't know what else I can try to implement an  &quot;audio-to-json&quot; task, which need some creativity, RNN seems doesn't have ability to create something)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement the struct of the neural network&#10;(With linear layer only, which seems stupid, but I don't know what else I can try to implement an  &quot;audio-to-json&quot; task, which need some creativity, RNN seems doesn't have ability to create something)" />
   </component>
 </project>
