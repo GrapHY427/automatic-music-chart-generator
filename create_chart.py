@@ -35,6 +35,7 @@ class ChartParser:
         self.tempo_list = chart_dict["tempo_list"]
         self.event_order_list = chart_dict["event_order_list"]
         self.note_list = chart_dict["note_list"]
+        self.bpm = 60000000 / self.tempo_list["value"]
         self.temp_list = []
 
     def create_note_list_tensor(self):
@@ -69,13 +70,13 @@ class ChartGenerator:
     """
 
     def __init__(self, music_name: str, format_version: int = 0,
-                 time_base: int = 480, start_offset_time: float = 0, page_tick: int = 960):
+                 time_base: int = 480, start_offset_time: float = 0, bpm: int = None, page_tick: int = 960):
         self.music_path = music_name + '.wav'
         self.filename = music_name + '.json'
 
         song = AudioSegment.from_wav(self.music_path)
         self.duration_time = song.duration_seconds
-        self.bpm = self.get_file_bpm()
+        self.bpm = bpm if (bpm is not None) else self.get_file_bpm()
         self.tick_total = round(self.duration_time * self.bpm * time_base / 60)
 
         self.chart_head = {"format_version": format_version,

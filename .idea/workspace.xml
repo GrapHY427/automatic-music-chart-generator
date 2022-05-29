@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7deedf3-cc2f-4679-a7e6-2b768ea886cd" name="默认变更列表" comment="complete 'dump to json' method">
+    <list default="true" id="c7deedf3-cc2f-4679-a7e6-2b768ea886cd" name="默认变更列表" comment="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Create_dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_chart.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653630619175</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)">
+      <created>1653823264839</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653823264839</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +174,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="complete 'dump to json' method" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete 'dump to json' method" />
+    <MESSAGE value="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)" />
+    <option name="LAST_COMMIT_MESSAGE" value="prettify the struct of the code&#10;ignore .json file&#10;Now the program have ability to create the same size of tensor with different length of musics and charts:&#10;(If there is no more data received, use '0' to fill remain area)" />
   </component>
 </project>
