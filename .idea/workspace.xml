@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7deedf3-cc2f-4679-a7e6-2b768ea886cd" name="默认变更列表" comment="complete 'dump to json' method">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Create_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Create_dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_chart.py" afterDir="false" />

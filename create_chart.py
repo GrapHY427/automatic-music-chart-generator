@@ -8,11 +8,6 @@ import torchvision.transforms as transforms
 
 
 """
-    Alternative import
-"""
-# import matplotlib.pyplot as plt
-
-"""
     Macro
 """
 MAX_NOTE = 1800
@@ -227,27 +222,3 @@ class DatasetGenerator:
         spectrogram = torch.cat([spectrogram, torch.Tensor(1200 * MAX_DURATION -
                                                            round(self.chart_generator.duration_time * 20), 200)])
         return spectrogram
-
-
-chart = ChartParser('chart.hard')
-# data = chart.get_note_list()
-# for each in data:
-#     print(each)
-
-
-# util = ChartGenerator('music')
-# util.generate_page_list()
-# print(util.bpm)
-# util.generate_chart()
-
-# i = 0
-# for each in util.page_list:
-#     print(str(i) + str(each))
-#     i += 1
-
-data = chart.create_note_list_tensor()
-print(data.size())
-# for each1 in data:
-#     for each2 in each1:
-#         print(float(each2), end="    ")
-#     print("")
