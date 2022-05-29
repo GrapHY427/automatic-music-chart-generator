@@ -1,4 +1,6 @@
 import json
+
+import torch
 from pydub import AudioSegment
 from aubio import source, tempo
 from numpy import median, diff
@@ -25,6 +27,29 @@ class ChartParser:
         self.tempo_list = chart_dict["tempo_list"]
         self.event_order_list = chart_dict["event_order_list"]
         self.note_list = chart_dict["note_list"]
+        self.temp_list = []
+
+    def create_note_list_tensor(self):
+        """
+            The format of the tensor:
+                0: '1.0' if there exist a Note, else '0.0'
+                1 - 9 : The map of 'Note' class's information
+        """
+
+        for each in self.note_list:
+            first_dimension = [1,
+                               each['page_index'],
+                               each['type'],
+                               each['id'],
+                               each['tick'],
+                               each['x'],
+                               1 if each['has_sibling'] else 0,
+                               each['hold_tick'],
+                               each['next_id'],
+                               1 if each['is_forward'] else 0]
+            self.temp_list.append(first_dimension)
+        page_list_tensor = torch.Tensor(self.temp_list)
+        return page_list_tensor
 
 
 class ChartGenerator:
@@ -39,8 +64,8 @@ class ChartGenerator:
 
         song = AudioSegment.from_wav(self.music_path)
         self.duration_time = song.duration_seconds
-        self.bpm = round(self.get_file_bpm())
-        self.tick_total = self.duration_time * self.bpm * 8
+        self.bpm = self.get_file_bpm()
+        self.tick_total = round(self.duration_time * self.bpm * time_base / 60)
 
         self.chart_head = {"format_version": format_version,
                            "time_base": time_base,
@@ -48,7 +73,7 @@ class ChartGenerator:
         self.page_tick = page_tick
         self.page_list = []
         self.tempo_list = [{"tick": 0,
-                            "value": round(60000000 / self.bpm)}]
+                            "value": 60000000 / self.bpm}]
         self.event_order_list = []
         self.note_list = []
 
@@ -128,7 +153,7 @@ class ChartGenerator:
 
 
 class Note:
-    """  Class that used to let the 'Note' data structure
+    """  Class that used to let the 'Note' data struct
          clearer and easier to understand
     """
 
@@ -146,15 +171,43 @@ class Note:
             'is_forward': is_forward}
 
 
-# chart = ChartParser('chart.hard')
+class EventOrder:
+    """
+        Class that used to let the "Event order" data struct
+        clearer and easier to understand
+    """
+
+    def __init__(self, tick: int, event_type: int, args: int):
+        arg_list = ['W', 'R', 'G']
+        self.dictionary = {
+            "tick": tick,
+            "event_list": [
+                {
+                    "type": event_type,
+                    "args": arg_list[args]
+                }
+            ]}
+
+
+chart = ChartParser('chart.hard')
 # data = chart.get_note_list()
 # for each in data:
 #     print(each)
-util = ChartGenerator('music')
-util.generate_page_list()
-print(util.bpm)
-util.generate_chart()
+
+
+# util = ChartGenerator('music')
+# util.generate_page_list()
+# print(util.bpm)
+# util.generate_chart()
+
 # i = 0
 # for each in util.page_list:
 #     print(str(i) + str(each))
 #     i += 1
+
+# data = chart.create_note_list_tensor()
+# print(data.size())
+# for each1 in data:
+#     for each2 in each1:
+#         print(float(each2), end="    ")
+#     print("")
