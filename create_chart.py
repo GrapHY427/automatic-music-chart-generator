@@ -1,9 +1,22 @@
 import json
-
 import torch
 from pydub import AudioSegment
 from aubio import source, tempo
 from numpy import median, diff
+import torchaudio
+import torchvision.transforms as transforms
+
+
+"""
+    Alternative import
+"""
+# import matplotlib.pyplot as plt
+
+"""
+    Macro
+"""
+MAX_NOTE = 1800
+MAX_DURATION = 5  # unit: minute
 
 
 # #####################################################################
@@ -36,6 +49,7 @@ class ChartParser:
                 1 - 9 : The map of 'Note' class's information
         """
 
+        total_note = 0
         for each in self.note_list:
             first_dimension = [1,
                                each['page_index'],
@@ -48,7 +62,9 @@ class ChartParser:
                                each['next_id'],
                                1 if each['is_forward'] else 0]
             self.temp_list.append(first_dimension)
+            total_note += 1
         page_list_tensor = torch.Tensor(self.temp_list)
+        page_list_tensor = torch.cat([page_list_tensor, torch.Tensor(MAX_NOTE - total_note, 10)])
         return page_list_tensor
 
 
@@ -189,6 +205,30 @@ class EventOrder:
             ]}
 
 
+class DatasetGenerator:
+
+    def __init__(self, path):
+        self.path = path + '.wav'
+        self.chart_generator = ChartGenerator(path)
+        self.spectrogram = self.spectrogram_transformer()
+
+    def spectrogram_transformer(self):
+        waveform, sample_rate = torchaudio.load(self.path)
+        spectrogram = torchaudio.transforms.Spectrogram()(waveform)
+        spectrogram = spectrogram.permute(0, 2, 1)
+        spectrogram = spectrogram[0]
+        transformer1 = transforms.ToPILImage()
+        transformer2 = transforms.Resize((round(self.chart_generator.duration_time * 20), 200))
+        transformer3 = transforms.ToTensor()
+        spectrogram = transformer1(spectrogram)
+        spectrogram = transformer2(spectrogram)
+        spectrogram = transformer3(spectrogram)
+        spectrogram = torch.squeeze(spectrogram, 0)
+        spectrogram = torch.cat([spectrogram, torch.Tensor(1200 * MAX_DURATION -
+                                                           round(self.chart_generator.duration_time * 20), 200)])
+        return spectrogram
+
+
 chart = ChartParser('chart.hard')
 # data = chart.get_note_list()
 # for each in data:
@@ -205,8 +245,8 @@ chart = ChartParser('chart.hard')
 #     print(str(i) + str(each))
 #     i += 1
 
-# data = chart.create_note_list_tensor()
-# print(data.size())
+data = chart.create_note_list_tensor()
+print(data.size())
 # for each1 in data:
 #     for each2 in each1:
 #         print(float(each2), end="    ")
